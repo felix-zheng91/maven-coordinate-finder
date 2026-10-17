@@ -1,8 +1,16 @@
 # Maven Coordinate Finder
 
+[![JetBrains Marketplace](https://img.shields.io/badge/Marketplace-Maven%20Coordinate%20Finder-000000?logo=jetbrains&logoColor=white)](https://plugins.jetbrains.com/plugin/35213-maven-coordinate-finder)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/35213)](https://plugins.jetbrains.com/plugin/35213-maven-coordinate-finder)
+
 一个 IntelliJ IDEA 插件：在 IDE 内搜索 Maven 依赖坐标、列出全部版本、一键复制可粘贴的 dependency 片段。
 
 仓库：<https://github.com/felix-zheng91/maven-coordinate-finder>
+
+## 安装
+
+在 IDE 中打开 `Settings → Plugins → Marketplace`，搜索 **Maven Coordinate Finder**，
+或从 [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/35213-maven-coordinate-finder) 安装。
 
 **它不做什么**：不修改 `pom.xml` / `build.gradle`，不做依赖树分析、冲突检测。只负责「搜坐标 → 列版本 → 复制」。
 
