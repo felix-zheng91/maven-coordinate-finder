@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Maven Coordinate Finder — IntelliJ IDEA Plugin</title>
+  <meta name="description" content="Search Maven coordinates, list every published version, and copy dependency snippets from IntelliJ IDEA.">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f6f8fa;
+      --fg: #1f2328;
+      --muted: #59636e;
+      --border: #d0d7de;
+      --accent: #1f6feb;
+      --code-bg: rgba(127, 127, 127, 0.15);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d1117;
+        --fg: #e6edf3;
+        --muted: #8b949e;
+        --border: #30363d;
+        --accent: #4c8dff;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC",
+                   "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+    }
+    main { max-width: 760px; margin: 0 auto; padding: 56px 20px 72px; }
+    .hero { display: flex; align-items: center; gap: 16px; }
+    .hero img { width: 64px; height: 64px; border-radius: 14px; flex: none; }
+    h1 { font-size: 28px; line-height: 1.25; margin: 0 0 4px; letter-spacing: -0.01em; }
+    .subtitle { color: var(--muted); margin: 0; font-size: 15px; }
+    .lead { margin: 26px 0 30px; font-size: 17px; }
+    section { margin: 36px 0; }
+    h2 { font-size: 18px; margin: 0 0 12px; }
+    .widgets { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; }
+    #mp-card { min-height: 220px; min-width: 300px; }
+    #mp-install { min-height: 48px; }
+    ul { padding-left: 20px; margin: 0; }
+    li { margin: 6px 0; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      background: var(--code-bg);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    .links { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+    .note { color: var(--muted); font-size: 14px; }
+    footer {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
+    }
+    @media (max-width: 480px) {
+      main { padding-top: 36px; }
+      h1 { font-size: 24px; }
+      .hero { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <div class="hero">
+    <img src="icon.svg" alt="Maven Coordinate Finder icon">
+    <div>
+      <h1>Maven Coordinate Finder</h1>
+      <p class="subtitle">IntelliJ IDEA plugin · Apache-2.0 · Free</p>
+    </div>
+  </div>
+
+  <p class="lead">
+    Search Maven coordinates without leaving the IDE. Search by keyword,
+    <code>groupId:artifactId</code>, or a fully-qualified class name; list every
+    published version; copy a ready-to-paste Maven or Gradle snippet.
+  </p>
+
+  <section class="widgets">
+    <div id="mp-card"></div>
+    <div id="mp-install"></div>
+  </section>
+
+  <noscript>
+    <p class="note">
+      Enable JavaScript to see the Marketplace card, or open the
+      <a href="https://plugins.jetbrains.com/plugin/35213-maven-coordinate-finder">plugin page</a> directly.
+    </p>
+  </noscript>
+
+  <section>
+    <h2>Features</h2>
+    <ul>
+      <li>Search by keyword, Maven coordinates, or fully-qualified class name.</li>
+      <li>Every published version, read from the authoritative <code>maven-metadata.xml</code>.</li>
+      <li>Copy as Maven XML, Gradle Groovy, Gradle Kotlin DSL, or plain coordinates.</li>
+      <li>Class-name results are verified against actual jar contents, not just a search index.</li>
+      <li>English and Chinese UI that follows the IDE language.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Links</h2>
+    <div class="links">
+      <a href="https://plugins.jetbrains.com/plugin/35213-maven-coordinate-finder">JetBrains Marketplace</a>
+      <a href="https://github.com/felix-zheng91/maven-coordinate-finder">GitHub repository</a>
+      <a href="https://github.com/felix-zheng91/maven-coordinate-finder/blob/main/README.md">README</a>
+    </div>
+  </section>
+
+  <footer>
+    Licensed under Apache-2.0. The plugin never modifies build files on its own.
+  </footer>
+</main>
+
+<script src="https://plugins.jetbrains.com/assets/scripts/mp-widget.js"></script>
+<script>
+  MarketplaceWidget.setupMarketplaceWidget('card', 35213, "#mp-card");
+  MarketplaceWidget.setupMarketplaceWidget('install', 35213, "#mp-install");
+</script>
+</body>
+</html>

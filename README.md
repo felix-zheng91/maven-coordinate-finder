@@ -12,6 +12,8 @@
 在 IDE 中打开 `Settings → Plugins → Marketplace`，搜索 **Maven Coordinate Finder**，
 或从 [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/35213-maven-coordinate-finder) 安装。
 
+在线介绍页（含官方安装按钮）：<https://felix-zheng91.github.io/maven-coordinate-finder/>
+
 **它不做什么**：不修改 `pom.xml` / `build.gradle`，不做依赖树分析、冲突检测。只负责「搜坐标 → 列版本 → 复制」。
 
 许可证：[Apache-2.0](LICENSE)。
