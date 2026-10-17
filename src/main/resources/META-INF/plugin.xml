@@ -1,0 +1,31 @@
+<idea-plugin>
+    <id>dev.felix.maven-search</id>
+    <name>Maven Coordinate Finder</name>
+    <vendor>felix</vendor>
+
+    <description><![CDATA[
+        Search Maven artifact coordinates by keyword or fully-qualified class name,
+        list every published version, and copy a ready-to-paste dependency snippet.
+        The plugin never modifies build files on its own.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <resource-bundle>messages.MavenSearchBundle</resource-bundle>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow
+                id="MavenSearch"
+                anchor="right"
+                secondary="true"
+                icon="/icons/mavenSearch.svg"
+                factoryClass="dev.felix.mavensearch.ui.MavenSearchToolWindowFactory"/>
+
+        <notificationGroup
+                id="Maven Search"
+                displayType="BALLOON"
+                isLogByDefault="false"/>
+    </extensions>
+
+    <!-- since-build / until-build 由 Gradle 的 patchPluginXml 从 pluginConfiguration 注入 -->
+</idea-plugin>
