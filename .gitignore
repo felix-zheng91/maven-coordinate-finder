@@ -8,3 +8,13 @@ local.properties
 out/
 .DS_Store
 .kotlin/
+
+# Signing material — never commit
+*.pem
+*.crt
+*.b64
+certificate-chain.txt
+private-key.txt
+
+# Local-only publishing notes (never commit)
+docs/PUBLISHING.local.md

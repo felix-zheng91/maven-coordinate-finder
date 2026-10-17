@@ -2,6 +2,8 @@
 
 一个 IntelliJ IDEA 插件：在 IDE 内搜索 Maven 依赖坐标、列出全部版本、一键复制可粘贴的 dependency 片段。
 
+仓库：<https://github.com/felix-zheng91/maven-coordinate-finder>
+
 **它不做什么**：不修改 `pom.xml` / `build.gradle`，不做依赖树分析、冲突检测。只负责「搜坐标 → 列版本 → 复制」。
 
 许可证：[Apache-2.0](LICENSE)。
@@ -31,47 +33,10 @@ mise use java@temurin-25.0.4+101.0.LTS
 ./gradlew runIde                            # 启动沙箱 IDE 调试
 ./gradlew buildPlugin                       # 产出 build/distributions/maven-search-*.zip
 ./gradlew verifyPlugin                      # Plugin Verifier 兼容性检查
-./gradlew signPlugin                        # 签名（需签名环境变量）
-./gradlew publishPlugin                     # 发布到 Marketplace（需 PUBLISH_TOKEN）
 ```
 
 安装到本机 IDEA：`Settings → Plugins → ⚙ → Install Plugin from Disk...`，选择
 `build/distributions/` 下的 zip，重启 IDE。工具窗口在右侧边栏的 **Maven Coordinates**。
-
-## 发布到 JetBrains Marketplace
-
-1. **首次上传必须手动**：登录 [Marketplace 作者页](https://plugins.jetbrains.com/author/me)，
-   `Add new plugin` 上传 `build/distributions/maven-search-1.0.0.zip`，填写名称、许可证、标签等信息。
-2. 在 `My Tokens` 生成发布 token（只显示一次）。
-3. 之后即可用 Gradle 发布：
-
-   ```bash
-   export PUBLISH_TOKEN='你的 token'
-   ./gradlew publishPlugin
-   ```
-
-4. 插件包签名需要证书链与私钥（Base64 编码后放入环境变量）：
-
-   ```bash
-   export CERTIFICATE_CHAIN='base64 后的 chain.crt'
-   export PRIVATE_KEY='base64 后的 private.pem'
-   export PRIVATE_KEY_PASSWORD='私钥口令'
-   ./gradlew signPlugin
-   ```
-
-   生成密钥对：
-
-   ```bash
-   openssl genpkey -aes-256-cbc -algorithm RSA -out private_encrypted.pem -pkeyopt rsa_keygen_bits:4096
-   openssl rsa -in private_encrypted.pem -out private.pem
-   openssl req -key private.pem -new -x509 -days 365 -out chain.crt
-   base64 -w0 chain.crt > chain.b64
-   base64 -w0 private.pem > private.b64
-   ```
-
-5. 每次发布前必须提升 `version`，Marketplace 不接受重复版本号。
-
-> 插件 ID `dev.felix.maven-search` 一旦发布即永久生效，后续不能更改。
 
 ## 使用
 
@@ -118,8 +83,6 @@ Maven Central 的 `fc:` 类名索引对大型 artifact 覆盖很差：搜 `com.g
 2. 去掉 `<em>` 后**完全等于**查询串才算精确匹配（`EXACT`）；
 3. 带 `repackaged.` 等前缀的一律降级为近似结果（`RELOCATED`），**默认隐藏**；
 4. 空结果会区分「没有精确匹配，另有 N 个近似结果」和「完全没有命中」，不会只显示「未找到」。
-
-结果行会显示「匹配: com.google.gson.Gson」，让你能看到插件凭什么给出这个坐标。
 
 结果行会显示「匹配: com.google.gson.Gson」，让你能看到插件凭什么给出这个坐标。
 异步校验通过的条目还会显示 **✓**：插件会从 `repo1` 用 HTTP Range 读取 jar 末尾
@@ -172,5 +135,6 @@ src/main/kotlin/dev/felix/mavensearch/
 ./gradlew test
 ```
 
-29 个测试：Solr JSON 解析、metadata 解析（含 XXE 拒绝）、URL/Lucene 转义、输入分类、
-片段生成、数据源回退、缓存、设置序列化往返，以及在真实平台环境里构造面板。
+41 个测试：Solr JSON 解析、metadata 解析（含 XXE 拒绝）、URL/Lucene 转义、输入分类、
+片段生成、数据源回退、缓存、设置序列化往返、jar 中央目录解析与 HTTP Range 校验，
+以及在真实平台环境里构造面板。
